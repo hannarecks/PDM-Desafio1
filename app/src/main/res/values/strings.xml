@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Balaio de Lenha</string>
+
+    <string name="Consumo">Consumo total R$:</string>
+    <string name="Couvert">Couvert artístico R$:</string>
+    <string name="Divisao">Dividir conta por:</string>
+
+    <string name="btnCalc">Calcular conta final</string>
+
+    <string name="taxa">Taxa de serviço (10%) R$:</string>
+    <string name="total">Conta total R$:</string>
+    <string name="pPessoa">Valor por pessoa R$:</string>
+    <string name="dolar">Valor em dólar $:</string>
+    <string name="dataCotacao">Data da cotação:</string>
+</resources>
