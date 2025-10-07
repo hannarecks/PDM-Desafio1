@@ -81,17 +81,11 @@ public class MainActivity extends AppCompatActivity {
             if(result != null) {
                 try {
                     JSONObject obj = new JSONObject (result);
-                    String logradouro = obj.getString("logradouro");
-                    String complemento = obj.getString("complemento");
-                    String bairro = obj.getString("bairro");
-                    String localidade = obj.getString("localidade");
-                    String uf = obj.getString("uf");
+                    String bid = obj.getString("bid");
+                    String create_date = obj.getString("create_date");
 
-                    txtLogradouro.setText(logradouro);
-                    txtComplemento.setText(complemento);
-                    txtBairro.setText(bairro);
-                    txtLocalidade.setText(localidade);
-                    txtUf.setText(uf);
+                    txtDolar.setText(bid);
+                    txtDataCota.setText(create_date);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
