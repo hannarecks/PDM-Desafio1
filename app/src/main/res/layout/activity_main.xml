@@ -142,21 +142,47 @@
                 android:background="@color/white" />
         </TableRow>
 
-        <TextView
-            android:id="@+id/valorDolar"
+        <TableRow
+            android:layout_marginTop="20dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10sp"
-            android:text="@string/dolar"
-            android:textSize="20sp" />
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/tvDolar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/dolar"
+                android:textSize="20sp" />
 
-        <TextView
-            android:id="@+id/valorDolar"
+            <EditText
+                android:id="@+id/txtDolar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_weight="1"
+                android:background="@color/white"/>
+        </TableRow>
+
+        <TableRow
+            android:layout_marginTop="20dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10sp"
-            android:text="@string/dataCotacao"
-            android:textSize="20sp" />
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/tvDatacotacao"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/dataCotacao"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/txtDatacota"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_weight="1"
+                android:background="@color/white"/>
+        </TableRow>
 
     </TableLayout>
 
