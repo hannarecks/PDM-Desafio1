@@ -6,6 +6,8 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.activity.EdgeToEdge;
@@ -25,7 +27,13 @@ import java.net.URL;
 
 public class MainActivity extends AppCompatActivity {
     private EditText txtDolar, txtDataCota;
-    private EditText txtContaTotal;
+    private EditText txtConsumoTotal;
+    private EditText txtCouvert;
+    private EditText txtPessoas;
+    private EditText taxa;
+    private EditText contaTotal;
+    private EditText valorPessoa;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +48,15 @@ public class MainActivity extends AppCompatActivity {
 
         txtDolar = (EditText) findViewById(R.id.txtDolar);
         txtDataCota = (EditText) findViewById(R.id.txtDatacota);
-        txtContaTotal = (EditText) findViewById(R.id.contaTotal);
+        txtConsumoTotal = (EditText) findViewById(R.id.contaTotal);
+        txtCouvert = (EditText) findViewById(R.id.couvertArtistico);
+        txtPessoas = (EditText) findViewById(R.id.pessoas);
+        taxa = (EditText) findViewById(R.id.taxa);
+        contaTotal = (EditText) findViewById(R.id.contaTotal);
+        valorPessoa = (EditText) findViewById(R.id.valorPessoa);
+
+        Button btn = findViewById(R.id.btnCalcular);
+
 
         getSupportActionBar().setDisplayUseLogoEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -48,6 +64,63 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("BalaioDeLenha");
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#808080")));
     }
+
+    public void onClickCalc(View view){
+        int pessoas = Integer.parseInt(txtPessoas.getText().toString());
+        double consumoTotal = Double.parseDouble(txtConsumoTotal.getText().toString());
+        double counvert = Double.parseDouble(txtCouvert.getText().toString());
+
+        String resultadoContaTotal = calcConsumoTot();
+        contaTotal.setText(resultadoContaTotal);
+
+        String resultado10 = calcula10(resultadoContaTotal);
+        taxa.setText(resultado10);
+
+        String resultadoPessoa = calcularPorPessoa(resultadoContaTotal, pessoas);
+        valorPessoa.setText(resultadoPessoa);
+
+        new HttpAsyncTask().execute();
+    }
+
+    public String calcConsumoTot(){
+        String totalString = txtConsumoTotal.getText().toString();
+        String couvertString = txtCouvert.getText().toString();
+        String pessoasString = txtPessoas.getText().toString();
+
+        double cTotal = Double.parseDouble(totalString);
+        double couvert = Double.parseDouble(couvertString);
+        double pessoas = Double.parseDouble(pessoasString);
+
+        double calcTotal = cTotal + (couvert * pessoas);
+
+        String resultadoFormatado = String.format("%.2f", calcTotal);
+
+        String resultado = ("R$ " + resultadoFormatado);
+
+        return resultado;
+    }
+
+
+    public String calcula10(String total){
+
+        double contaTotal = Double.parseDouble(total);
+        double total10 = contaTotal * 0.1;
+
+        String total10String = String.format("%.2f", total10);
+        String resultado = ("R$ " + total10String);
+        return resultado;
+    }
+
+    public String calcularPorPessoa(String total, int pessoas){
+
+        double contaTotal = Double.parseDouble(total);
+        double porPessoa = contaTotal / pessoas;
+
+        String contaPessoa = String.format("%.2f", porPessoa);
+        String resultado = ("R$ " + contaPessoa);
+        return resultado;
+    }
+
 
     public class HttpAsyncTask extends AsyncTask<String, Void, String> {
         ProgressDialog dialog;
@@ -86,8 +159,8 @@ public class MainActivity extends AppCompatActivity {
                     double compra = obj.getDouble("compra");
                     String dataAtualizacao = obj.getString("dataAtualizacao");
 
-                    double conta = Double.parseDouble(txtContaTotal.getText().toString());
-                    double resultado = conta * compra;
+                    double conta = Double.parseDouble(txtConsumoTotal.getText().toString());
+                    double resultado = conta / compra;
                     String resultadoFormatado = String.format("%.2f", resultado);
 
                     txtDolar.setText(resultadoFormatado);

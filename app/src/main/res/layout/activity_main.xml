@@ -43,6 +43,7 @@
                 android:textSize="20sp" />
 
             <EditText
+                android:id="@+id/couvertArtistico"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
@@ -62,6 +63,7 @@
                 android:textSize="20sp" />
 
             <EditText
+                android:id="@+id/pessoas"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
@@ -80,7 +82,8 @@
         android:textSize="20sp"
         android:textColor="@color/black"
         android:background="@color/gray"
-        android:layout_gravity="center"/>
+        android:layout_gravity="center"
+        android:onClick="onClickCalc"/>
 
     <TableLayout
         android:layout_width="match_parent"
@@ -97,6 +100,7 @@
                 android:textSize="20dp" />
 
             <EditText
+                android:id="@+id/taxa"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
@@ -136,6 +140,7 @@
                 android:textSize="20sp" />
 
             <EditText
+                android:id="@+id/valorPessoa"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
