@@ -25,6 +25,7 @@ import java.net.URL;
 
 public class MainActivity extends AppCompatActivity {
     private EditText txtDolar, txtDataCota;
+    private EditText txtContaTotal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
         txtDolar = (EditText) findViewById(R.id.txtDolar);
         txtDataCota = (EditText) findViewById(R.id.txtDatacota);
+        txtContaTotal = (EditText) findViewById(R.id.contaTotal);
 
         getSupportActionBar().setDisplayUseLogoEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -52,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
 
         protected String doInBackground(String... params) {
             try {
-                URL url = new URL("https://economia.awesomeapi.com.br/json/last/USD");
+                URL url = new URL("https://br.dolarapi.com/v1/cotacoes/usd");
                 HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
                 urlConnection.setRequestMethod("GET");
                 int status = urlConnection.getResponseCode();
@@ -81,11 +83,15 @@ public class MainActivity extends AppCompatActivity {
             if(result != null) {
                 try {
                     JSONObject obj = new JSONObject (result);
-                    String bid = obj.getString("bid");
-                    String create_date = obj.getString("create_date");
+                    double compra = obj.getDouble("compra");
+                    String dataAtualizacao = obj.getString("dataAtualizacao");
 
-                    txtDolar.setText(bid);
-                    txtDataCota.setText(create_date);
+                    double conta = Double.parseDouble(txtContaTotal.getText().toString());
+                    double resultado = conta * compra;
+                    String resultadoFormatado = String.format("%.2f", resultado);
+
+                    txtDolar.setText(resultadoFormatado);
+                    txtDataCota.setText(dataAtualizacao);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
